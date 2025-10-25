@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { Container } from 'react-bootstrap'
 
 const HomePage = () => {
   const navigate = useNavigate()
@@ -14,9 +15,9 @@ const HomePage = () => {
   }, [])
 
   return (
-    <div>
+    <Container className="mt-5">
       <h1>Главная страница</h1>
-    </div>
+    </Container>
   )
 }
 
