@@ -5,7 +5,7 @@ import NotFoundPage from './pages/NotFoundPage.jsx'
 
 
 const App = () => {
-  console.log('App рендерится')
+  console.log('Отрисовка APP')
   return (
     <BrowserRouter>
       <Routes>

@@ -2,7 +2,6 @@ import LoginForm from '../components/LoginForm.jsx'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 
 const LoginPage = () => (
-
   <Container fluid className="h-100">
     <Row className="justify-content-center align-content-center h-100">
       <Col xs={12} md={8} xxl={6}>

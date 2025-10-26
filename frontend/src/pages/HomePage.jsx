@@ -1,17 +1,19 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 import axios from 'axios'
 import routes from '../routes'
 import { addChannels } from '../slices/channelsSlice.jsx'
 import Chat from '../components/chat/Chat.jsx'
 
 const HomePage = () => {
+  console.log('отрисовка HomePage')
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const userId = useSelector(state => state.auth)
+  const { userId } = useSelector((state) => state.auth)
   const token = userId?.token
 
   useEffect(() => {
@@ -33,9 +35,9 @@ const HomePage = () => {
   }, [dispatch, navigate, token, userId])
 
   return (
-    <div className='h-100 d-flex flex-column'>
-      <Container className='h-100 my-4 overflow-hidden rounded shadow flex-fill'>
-        <Row className='h-100 bg-white flex-md-row'>
+    <div className="h-100 d-flex flex-column">
+      <Container className="h-100 my-4 overflow-hidden rounded shadow flex-fill">
+        <Row className="h-100 bg-white flex-md-row">
           <Chat />
         </Row>
       </Container>

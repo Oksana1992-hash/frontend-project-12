@@ -7,8 +7,9 @@ import { useDispatch } from 'react-redux'
 import { loginSuccess } from '../slices/authSlice'
 import { Button } from 'react-bootstrap'
 
-
 const LoginForm = () => {
+  console.log('отрисовка LoginForm')
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [authError, setAuthError] = useState(false)
@@ -20,8 +21,8 @@ const LoginForm = () => {
         setSubmitting(true)
         try {
           const responce = await axios.post(routes.loginPath(), values)
-          const token = responce.data
-          dispatch(loginSuccess({ token }))
+          const userData = responce.data
+          dispatch(loginSuccess(userData))
           setAuthError(false)
           navigate('/')
         }
@@ -40,7 +41,7 @@ const LoginForm = () => {
           <div className="form-floating mb-3">
             <Field
               id="username"
-              type="text"
+              type="username"
               name="username"
               placeholder="Введите имя пользователя"
               autoComplete="username"
@@ -61,10 +62,10 @@ const LoginForm = () => {
               className={`form-control ${authError ? 'is-invalid' : ''}`}
             />
             <label htmlFor="password">Пароль</label>
+            {authError && <div className='invalid-tooltip'>Неверные имя пользователя или пароль</div>}
           </div>
 
-          {authError && <div className='invalid-tooltip'>Неверные имя пользователя или пароль</div>}
-          <Button type='submit' variant='outline-primary' className='w-100 mb-3' disabled={isSubmitting}>
+          <Button type='submit' variant='outline-primary' className="w-100 mb-3" disabled={isSubmitting}>
             Войти
           </Button>
         </Form>
