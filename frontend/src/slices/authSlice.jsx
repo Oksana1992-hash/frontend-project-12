@@ -1,10 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const userId = localStorage.getItem('userId')
-// userId { token: '', username: '' }
+// Получаем сохранённые данные о пользователе
+let storedUserData
+try {
+  const stored = localStorage.getItem('userId')
+  storedUserData = stored ? JSON.parse(stored) : null
+} catch (e) {
+  console.error('Ошибка парсинга userId из localStorage:', e)
+  storedUserData = null
+}
 
 const initialState = {
-  userId: userId ? JSON.parse(userId) : null,
+  userId: storedUserData, // здесь хранится объект или null
 }
 
 const authSlice = createSlice({
