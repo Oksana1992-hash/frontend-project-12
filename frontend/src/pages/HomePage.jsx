@@ -1,12 +1,15 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { Container } from 'react-bootstrap'
+import { useSelector, useDispatch } from 'react-redux'
+import { Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios'
 import routes from '../routes'
+import { addChannels } from '../slices/channelsSlice.jsx'
+import Chat from '../components/chat/Chat.jsx'
 
 const HomePage = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const userId = useSelector((state) => state.auth.token)
   const token = userId?.token
@@ -19,19 +22,24 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         const responce = await axios.get(routes.getChannelsPath(), { headers: { Authorization: `Bearer ${token}`, } })
-        console.log('responce Главная страница', responce.data)
+        const channels = responce.data // [{id: '1', name: 'general', removable: false}, {id: '2', name: 'random', removable: false}]
+        dispatch(addChannels(channels))
       }
       catch (error) {
         console.log(error.message)
       }
     }
     fetchData()
-  }, [navigate, token, userId])
+  }, [dispatch, navigate, token, userId])
 
   return (
-    <Container className="mt-5">
-      <h1>Главная страница</h1>
-    </Container>
+    <div className='h-100 d-flex flex-column'>
+      <Container className='h-100 my-4 overflow-hidden rounded shadow flex-fill'>
+        <Row className='h-100 bg-white flex-md-row'>
+          <Chat />
+        </Row>
+      </Container>
+    </div>
   )
 }
 
