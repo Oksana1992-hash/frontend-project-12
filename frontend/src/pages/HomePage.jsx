@@ -11,7 +11,7 @@ const HomePage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const userId = useSelector((state) => state.auth.token)
+  const userId = useSelector(state => state.auth)
   const token = userId?.token
 
   useEffect(() => {
