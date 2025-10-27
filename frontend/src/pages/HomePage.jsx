@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Container, Row } from 'react-bootstrap'
 import axios from 'axios'
 import routes from '../routes'
-import { addChannels } from '../slices/channelsSlice.jsx'
+import { loadChannels } from '../slices/channelsSlice.jsx'
 import Chat from '../components/chat/Chat.jsx'
 
 const HomePage = () => {
@@ -13,7 +13,7 @@ const HomePage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { userId } = useSelector((state) => state.auth)
+  const { userId } = useSelector(state => state.auth)
   const token = userId?.token
 
   useEffect(() => {
@@ -23,9 +23,9 @@ const HomePage = () => {
     }
     const fetchData = async () => {
       try {
-        const response = await axios.get(routes.getChannelsPath(), { headers: { Authorization: `Bearer ${token}`, } })
+        const response = await axios.get(routes.channelsPath(), { headers: { Authorization: `Bearer ${token}`, } })
         const channels = response.data // [{id: '1', name: 'general', removable: false}, {id: '2', name: 'random', removable: false}]
-        dispatch(addChannels(channels))
+        dispatch(loadChannels(channels))
       }
       catch (error) {
         console.log(error.message)
