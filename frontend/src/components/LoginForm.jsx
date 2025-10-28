@@ -48,7 +48,7 @@ const LoginForm = () => {
               required
               className={`form-control ${authError ? 'is-invalid' : ''}`}
             />
-            <label htmlFor="username">Имя пользователя</label>
+            <label htmlFor="username">Ваш ник</label>
           </div>
           {/* Поле для пароля */}
           <div className="form-floating mb-4">
