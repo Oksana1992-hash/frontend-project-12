@@ -6,6 +6,7 @@ import axios from 'axios'
 import routes from '../routes'
 import { loadChannels } from '../slices/channelsSlice.jsx'
 import Chat from '../components/chat/Chat.jsx'
+import Header from '../components/Header.jsx'
 
 const HomePage = () => {
   console.log('отрисовка HomePage')
@@ -29,6 +30,9 @@ const HomePage = () => {
         dispatch(loadChannels(channels))
       }
       catch (error) {
+        if (error.status === 401) {
+          navigate('/login')
+        }
         console.log(error.message)
       }
     }
@@ -37,6 +41,7 @@ const HomePage = () => {
 
   return (
     <div className="h-100 d-flex flex-column">
+      <Header />
       <Container className="h-100 my-4 overflow-hidden rounded shadow flex-fill">
         <Row className="h-100 bg-white flex-md-row">
           <Chat />
