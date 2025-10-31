@@ -7,9 +7,13 @@ import routes from '../routes'
 import { loadChannels } from '../slices/channelsSlice.jsx'
 import Chat from '../components/chat/Chat.jsx'
 import Header from '../components/Header.jsx'
+import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const HomePage = () => {
   console.log('отрисовка HomePage')
+
+  const { t } = useTranslation()
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -32,12 +36,17 @@ const HomePage = () => {
       catch (error) {
         if (error.status === 401) {
           navigate('/login')
+          console.log(error.message)
+          toast.error(t('errors.authError'))
         }
-        console.log(error.message)
+        else {
+          console.log(error.message)
+          toast.error(t('errors.loadDataError'))
+        }
       }
     }
     fetchData()
-  }, [dispatch, navigate, token, userId])
+  }, [dispatch, navigate, token, userId, t])
 
   return (
     <div className="h-100 d-flex flex-column">

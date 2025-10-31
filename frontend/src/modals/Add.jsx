@@ -6,6 +6,7 @@ import { Button, Modal, Form } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import routes from '../routes'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const Add = ({ onHide, setCurrentChannelId }) => {
   const { t } = useTranslation()
@@ -37,8 +38,10 @@ const Add = ({ onHide, setCurrentChannelId }) => {
       const responce = await axios.post(routes.channelsPath(), { name }, { headers: { Authorization: `Bearer ${token}`, }, })
       const newChannel = responce.data
       setCurrentChannelId(newChannel.id)
+      toast.success(t('toast.addChannel'))
     } catch (error) {
       console.log(error.message)
+      toast.error(t('errors.toastAddChannel'))
     }
     setSubmitting(false)
   }
