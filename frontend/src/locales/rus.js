@@ -16,13 +16,19 @@ export default {
         send: 'Отправить',
       },
       errors: {
+        authError: 'Ошибка авторизации',
         authorizationError: 'Такой пользователь уже существует',
         confirmPassword: 'Пароли должны совпадать',
+        loadDataError: 'Ошибка загрузки данных',
         loginError: 'Неверные имя пользователя или пароль',
         minPasswordLength: 'Не менее 6 символов',
         mustBeUnique: 'Должно быть уникальным',
         required: 'Обязательное поле',
+        serverNotConnection: 'Соединение с сервером потеряно',
         symbolsLength: 'От 3 до 20 символов',
+        toastAddChannel: 'Ошибка при создании канала',
+        toastRemoveChannel: 'Ошибка при удалении канала',
+        toastRenameChannel: 'Ошибка при переименовании канала',
       },
       header: {
         navbarBrand: 'Hexlet Chat',
@@ -68,6 +74,11 @@ export default {
         passwordLabel: 'Пароль',
         registrationButton: 'Зарегистрироваться',
         usernameLabel: 'Имя пользователя',
+      },
+      toast: {
+        addChannel: 'Канал создан',
+        removeChannel: 'Канал удален',
+        renameChannel: 'Канал переименован',
       }
     },
   },

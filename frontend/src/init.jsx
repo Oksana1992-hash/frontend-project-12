@@ -6,6 +6,7 @@ import { addChannel, removeChannel, renameChannel } from './slices/channelsSlice
 import App from './App.jsx'
 import i18next from 'i18next'
 import { initReactI18next, I18nextProvider } from 'react-i18next'
+import { toast } from 'react-toastify'
 import resources from './locales/rus.js'
 
 i18next
@@ -28,6 +29,7 @@ socket.on('connect', () => {
 
 socket.on('disconnect', () => {
   console.log('Соединение с сервером потеряно')
+  toast.error(i18next.t('errors.serverNotConnection'))
 })
 
 socket.on('newMessage', (payload) => {

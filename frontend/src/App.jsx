@@ -3,6 +3,8 @@ import HomePage from './pages/HomePage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import SignUpPage from './pages/SignUpPage.jsx'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 
 const App = () => {
@@ -15,6 +17,7 @@ const App = () => {
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/signup" element={<SignUpPage />} />
       </Routes>
+      <ToastContainer position='top-right' autoClose={5000} />
     </BrowserRouter>
   )
 }

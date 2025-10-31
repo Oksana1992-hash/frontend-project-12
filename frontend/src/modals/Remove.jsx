@@ -4,6 +4,7 @@ import { Button, Modal } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import routes from '../routes'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const Remove = ({ modalInfo, onHide, setCurrentChannelId }) => {
   const { t } = useTranslation()
@@ -20,8 +21,10 @@ const Remove = ({ modalInfo, onHide, setCurrentChannelId }) => {
       axios.delete(`${routes.channelsPath()}/${modalInfo.item.id}`, { headers: { Authorization: `Bearer ${token}`, }, })
       setCurrentChannelId('1')
       onHide()
+      toast.success(t('toast.removeChannel'))
     } catch (error) {
       console.log(error.message)
+      toast.error(t('errors.toastRemoveChannel'))
     }
     setRemoving(false)
   }
