@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { Button, Modal } from 'react-bootstrap'
-import { useSelector, useDispatch } from 'react-redux'
-import { removeChannel } from '../slices/channelsSlice'
+import { useSelector } from 'react-redux'
 import routes from '../routes'
+import { useTranslation } from 'react-i18next'
 
 const Remove = ({ modalInfo, onHide, setCurrentChannelId }) => {
-  const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   const { userId } = useSelector((state) => state.auth)
   const token = userId?.token
@@ -17,9 +17,7 @@ const Remove = ({ modalInfo, onHide, setCurrentChannelId }) => {
     e.preventDefault()
     setRemoving(true)
     try {
-      const responce = await axios.delete(`${routes.channelsPath()}/${modalInfo.item.id}`, { headers: { Authorization: `Bearer ${token}`, }, })
-      const { id } = responce.data
-      dispatch(removeChannel(id))
+      axios.delete(`${routes.channelsPath()}/${modalInfo.item.id}`, { headers: { Authorization: `Bearer ${token}`, }, })
       setCurrentChannelId('1')
       onHide()
     } catch (error) {
@@ -31,14 +29,14 @@ const Remove = ({ modalInfo, onHide, setCurrentChannelId }) => {
   return (
     <Modal show centered>
       <Modal.Header closeButton onHide={onHide}>
-        <Modal.Title>Удалить канал</Modal.Title>
+        <Modal.Title>{t('modals.removeChannel')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        <p className='lead'>Уверены?</p>
+        <p className='lead'>{t('modals.question')}</p>
         <div className='d-flex justify-content-end'>
-          <Button type='button' variant='secondary' className='me-2' onClick={() => onHide()}>Отменить</Button>
-          <Button type='button' variant='danger' onClick={handleRemove} disabled={isRemoving}>Удалить</Button>
+          <Button type='button' variant='secondary' className='me-2' onClick={() => onHide()}>{t('modals.cancelButton')}</Button>
+          <Button type='button' variant='danger' onClick={handleRemove} disabled={isRemoving}>{t('modals.removeButton')}</Button>
         </div>
       </Modal.Body>
     </Modal>

@@ -3,19 +3,19 @@ import * as Yup from 'yup';
 import axios from 'axios'
 import { useFormik } from 'formik'
 import { Button, Modal, Form } from 'react-bootstrap'
-import { useSelector, useDispatch } from 'react-redux'
-import { addChannel } from '../slices/channelsSlice'
+import { useSelector } from 'react-redux'
 import routes from '../routes'
+import { useTranslation } from 'react-i18next'
 
 const Add = ({ onHide, setCurrentChannelId }) => {
+  const { t } = useTranslation()
+
   const inputRef = useRef()
   useEffect(() => {
     inputRef.current.focus()
   }, [])
 
   const [isSubmitting, setSubmitting] = useState(false)
-
-  const dispatch = useDispatch()
 
   const channelsNames = useSelector((state) => state.channels.channels).map((channel) => channel.name)
 
@@ -25,18 +25,17 @@ const Add = ({ onHide, setCurrentChannelId }) => {
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .trim()
-      .required('Обязательное поле')
-      .min(3, 'От 3 до 20 символов')
-      .max(20, 'От 3 до 20 символов')
-      .notOneOf(channelsNames, 'Должно быть уникальным')
-  });
+      .required(t('errors.required'))
+      .min(3, t('errors.symbolsLength'))
+      .max(20, t('errors.symbolsLength'))
+      .notOneOf(channelsNames, t('errors.mustBeUnique'))
+  })
 
   const sendChannel = async (name) => {
     setSubmitting(true)
     try {
       const responce = await axios.post(routes.channelsPath(), { name }, { headers: { Authorization: `Bearer ${token}`, }, })
       const newChannel = responce.data
-      dispatch(addChannel(newChannel))
       setCurrentChannelId(newChannel.id)
     } catch (error) {
       console.log(error.message)
@@ -58,7 +57,7 @@ const Add = ({ onHide, setCurrentChannelId }) => {
   return (
     <Modal show centered>
       <Modal.Header closeButton onHide={onHide}>
-        <Modal.Title>Добавить канал</Modal.Title>
+        <Modal.Title>{t('modals.addChannel')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -73,11 +72,11 @@ const Add = ({ onHide, setCurrentChannelId }) => {
               onChange={formik.handleChange}
               required
             />
-            <Form.Label className='visually-hidden' htmlFor='name'>Имя канала</Form.Label>
+            <Form.Label className='visually-hidden' htmlFor='name'>{t('modals.channelName')}</Form.Label>
             <div className='invalid-feedback'>{formik.errors.name && formik.touched.name ? formik.errors.name : ''}</div>
             <div className='d-flex justify-content-end'>
-              <Button type='button' variant='secondary' className='me-2' onClick={() => onHide()}>Отменить</Button>
-              <Button type='submit' variant='primary' disabled={isSubmitting}>Отправить</Button>
+              <Button type='button' variant='secondary' className='me-2' onClick={() => onHide()}>{t('modals.cancelButton')}</Button>
+              <Button type='submit' variant='primary' disabled={isSubmitting}>{t('modals.sendButton')}</Button>
             </div>
           </Form.Group>
         </Form>
