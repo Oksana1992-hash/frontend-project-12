@@ -9,6 +9,7 @@ import { initReactI18next, I18nextProvider } from 'react-i18next'
 import { toast } from 'react-toastify'
 import resources from './locales/rus.js'
 import filter from 'leo-profanity'
+import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react'
 
 i18next
   .use(initReactI18next)
@@ -52,11 +53,20 @@ socket.on('renameChannel', (payload) => {
   store.dispatch(renameChannel(payload))
 })
 
+const rollbarConfig = {
+  accessToken: '344c4bf6bb18767df735e86f3b05d749',
+  environment: 'development',
+}
+
 const init = () => {
   return (
     <Provider store={store}>
       <I18nextProvider i18n={i18next}>
-        <App />
+        <RollbarProvider config={rollbarConfig}>
+          <ErrorBoundary>
+            <App />
+          </ErrorBoundary>
+        </RollbarProvider>
       </I18nextProvider>
     </Provider>
   )
