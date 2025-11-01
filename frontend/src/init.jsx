@@ -8,6 +8,7 @@ import i18next from 'i18next'
 import { initReactI18next, I18nextProvider } from 'react-i18next'
 import { toast } from 'react-toastify'
 import resources from './locales/rus.js'
+import filter from 'leo-profanity'
 
 i18next
   .use(initReactI18next)
@@ -20,6 +21,9 @@ i18next
       escapeValue: false,
     },
   })
+
+filter.add(filter.getDictionary('ru'))
+filter.add(filter.getDictionary('en'))
 
 const socket = io()
 

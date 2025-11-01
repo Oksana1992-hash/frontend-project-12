@@ -5,7 +5,7 @@ import axios from 'axios'
 import routes from '../../routes'
 import getModal from '../../modals/index.js'
 import { useTranslation } from 'react-i18next'
-
+import filter from 'leo-profanity'
 
 const Chat = () => {
   console.log('отрисовка Chat')
@@ -42,9 +42,11 @@ const Chat = () => {
 
     if (!inputValue.trim()) return
 
+    const cleanedMessage = filter.clean(inputValue)
+
     try {
-      const newMessage = { body: inputValue, channelId: currentChannelId, username }
-      axios.post(routes.addMessagePath(), newMessage, { headers: { Authorization: `Bearer ${token}`, } })
+      const newMessage = { body: cleanedMessage, channelId: currentChannelId, username }
+      await axios.post(routes.addMessagePath(), newMessage, { headers: { Authorization: `Bearer ${token}`, } })
       setInputValue('')
     }
     catch (error) {
@@ -81,7 +83,7 @@ const Chat = () => {
               onClick={() => setCurrentChannelId(channel.id)}
             >
               <span className="me-1">#</span>
-              {channel.name}
+              {filter.clean(channel.name)}
             </Button>
             <Dropdown.Toggle
               variant={`${channel.id === currentChannelId ? 'secondary' : 'white'}`}
@@ -135,15 +137,15 @@ const Chat = () => {
         <div className="d-flex flex-column h-100">
           <div className="bg-light mb-4 p-3 shadow-sm small">
             <p className="m-0">
-              <b># {channels.find(c => c.id === currentChannelId)?.name}</b>
+              <b># {filter.clean(channels.find(c => c.id === currentChannelId)?.name)}</b>
             </p>
-            <span className="text-muted">{currentChannelChat.length}{t('messages.messagesCounter.messagesCount', { count: currentChannelChat.length })}</span>
+            <span className="text-muted">{t('messages.messagesCounter.messagesCount', { count: currentChannelChat.length })}</span>
           </div>
 
           <div id='messages-box' className="chat-messages overflow-auto px-5">
             {currentChannelChat.map(({ id, body, username }) => (
               <div key={id} className="text-break mb-2">
-                <b>{username}</b>: {body}
+                <b>{username}</b>: {filter.clean(body)}
               </div>
             ))
             }
