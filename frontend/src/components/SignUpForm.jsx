@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import * as Yup from 'yup';
+import * as Yup from 'yup'
 import axios from 'axios'
 import { Formik, Form, Field } from 'formik'
 import { useNavigate } from 'react-router-dom'

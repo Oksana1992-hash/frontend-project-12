@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import * as Yup from 'yup';
+import * as Yup from 'yup'
 import axios from 'axios'
 import { useFormik } from 'formik'
 import { Button, Modal, Form } from 'react-bootstrap'
@@ -18,9 +18,9 @@ const Add = ({ onHide, setCurrentChannelId }) => {
 
   const [isSubmitting, setSubmitting] = useState(false)
 
-  const channelsNames = useSelector((state) => state.channels.channels).map((channel) => channel.name)
+  const channelsNames = useSelector(state => state.channels.channels).map(channel => channel.name)
 
-  const { userId } = useSelector((state) => state.auth)
+  const { userId } = useSelector(state => state.auth)
   const token = userId?.token
 
   const validationSchema = Yup.object().shape({
@@ -35,11 +35,12 @@ const Add = ({ onHide, setCurrentChannelId }) => {
   const sendChannel = async (name) => {
     setSubmitting(true)
     try {
-      const responce = await axios.post(routes.channelsPath(), { name }, { headers: { Authorization: `Bearer ${token}`, }, })
+      const responce = await axios.post(routes.channelsPath(), { name }, { headers: { Authorization: `Bearer ${token}` } })
       const newChannel = responce.data
       setCurrentChannelId(newChannel.id)
       toast.success(t('toast.addChannel'))
-    } catch (error) {
+    }
+    catch (error) {
       console.log(error.message)
       toast.error(t('errors.toastAddChannel'))
     }

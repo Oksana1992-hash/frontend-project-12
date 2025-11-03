@@ -24,7 +24,7 @@ export default {
         minPasswordLength: 'Не менее 6 символов',
         mustBeUnique: 'Должно быть уникальным',
         required: 'Обязательное поле',
-        serverNotConnection: 'Соединение с сервером потеряно',
+        serverNotConnection: 'Ошибка соединения',
         symbolsLength: 'От 3 до 20 символов',
         toastAddChannel: 'Ошибка при создании канала',
         toastRemoveChannel: 'Ошибка при удалении канала',
@@ -77,7 +77,7 @@ export default {
       },
       toast: {
         addChannel: 'Канал создан',
-        removeChannel: 'Канал удален',
+        removeChannel: 'Канал удалён',
         renameChannel: 'Канал переименован',
       }
     },

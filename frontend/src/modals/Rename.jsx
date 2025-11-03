@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import * as Yup from 'yup';
+import * as Yup from 'yup'
 import axios from 'axios'
 import { useFormik } from 'formik'
 import { Button, Modal, Form } from 'react-bootstrap'
@@ -18,9 +18,9 @@ const Rename = ({ modalInfo, onHide }) => {
 
   const [isSubmitting, setSubmitting] = useState(false)
 
-  const channelsNames = useSelector((state) => state.channels.channels).map((channel) => channel.name)
+  const channelsNames = useSelector(state => state.channels.channels).map(channel => channel.name)
 
-  const { userId } = useSelector((state) => state.auth)
+  const { userId } = useSelector(state => state.auth)
   const token = userId?.token
 
   const validationSchema = Yup.object().shape({
@@ -35,9 +35,10 @@ const Rename = ({ modalInfo, onHide }) => {
   const editChannel = async (newName, id) => {
     setSubmitting(true)
     try {
-      axios.patch(`${routes.channelsPath()}/${id}`, { name: newName }, { headers: { Authorization: `Bearer ${token}`, }, })
+      axios.patch(`${routes.channelsPath()}/${id}`, { name: newName }, { headers: { Authorization: `Bearer ${token}` } })
       toast.success(t('toast.renameChannel'))
-    } catch (error) {
+    }
+    catch (error) {
       console.log(error.message)
       toast.error(t('errors.toastRenameChannel'))
     }

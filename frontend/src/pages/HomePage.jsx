@@ -29,7 +29,7 @@ const HomePage = () => {
     }
     const fetchData = async () => {
       try {
-        const response = await axios.get(routes.channelsPath(), { headers: { Authorization: `Bearer ${token}`, } })
+        const response = await axios.get(routes.channelsPath(), { headers: { Authorization: `Bearer ${token}` } })
         const channels = response.data // [{id: '1', name: 'general', removable: false}, {id: '2', name: 'random', removable: false}]
         dispatch(loadChannels(channels))
       }

@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'
 const Remove = ({ modalInfo, onHide, setCurrentChannelId }) => {
   const { t } = useTranslation()
 
-  const { userId } = useSelector((state) => state.auth)
+  const { userId } = useSelector(state => state.auth)
   const token = userId?.token
 
   const [isRemoving, setRemoving] = useState(false)
@@ -18,11 +18,12 @@ const Remove = ({ modalInfo, onHide, setCurrentChannelId }) => {
     e.preventDefault()
     setRemoving(true)
     try {
-      axios.delete(`${routes.channelsPath()}/${modalInfo.item.id}`, { headers: { Authorization: `Bearer ${token}`, }, })
+      axios.delete(`${routes.channelsPath()}/${modalInfo.item.id}`, { headers: { Authorization: `Bearer ${token}` } })
       setCurrentChannelId('1')
       onHide()
       toast.success(t('toast.removeChannel'))
-    } catch (error) {
+    }
+    catch (error) {
       console.log(error.message)
       toast.error(t('errors.toastRemoveChannel'))
     }
