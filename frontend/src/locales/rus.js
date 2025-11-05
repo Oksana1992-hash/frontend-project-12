@@ -79,7 +79,7 @@ export default {
         addChannel: 'Канал создан',
         removeChannel: 'Канал удалён',
         renameChannel: 'Канал переименован',
-      }
+      },
     },
   },
 }

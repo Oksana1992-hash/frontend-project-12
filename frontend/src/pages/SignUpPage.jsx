@@ -7,7 +7,7 @@ const SignUpPage = () => {
   const { t } = useTranslation()
 
   return (
-    <div className='h-100 d-flex flex-column'>
+    <div className="h-100 d-flex flex-column">
       <Header />
       <Container fluid className="h-100">
         <Row className="justify-content-center align-content-center h-100">

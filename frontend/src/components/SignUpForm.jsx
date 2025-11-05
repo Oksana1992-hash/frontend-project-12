@@ -10,110 +10,111 @@ import { signUp } from '../slices/authSlice'
 import { useTranslation } from 'react-i18next'
 
 const SignUpForm = () => {
-  console.log('отрисовка SignUpForm')
+    console.log('отрисовка SignUpForm')
 
-  const { t } = useTranslation()
+    const { t } = useTranslation()
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
-  const [isUsernameTaken, setUsernameTaken] = useState(false)
+    const [isUsernameTaken, setUsernameTaken] = useState(false)
 
-  const validationSchema = Yup.object().shape({
-    username: Yup.string()
-      .trim()
-      .required(t('errors.required'))
-      .min(3, t('errors.symbolsLength'))
-      .max(20, t('errors.symbolsLength')),
-    password: Yup.string()
-      .trim()
-      .required(t('errors.required'))
-      .min(6, t('errors.minPasswordLength')),
-    confirmPassword: Yup.string()
-      .trim()
-      .required(t('errors.required'))
-      .oneOf([Yup.ref('password'), null], t('errors.confirmPassword'))
-  })
+    const validationSchema = Yup.object().shape({
+        username: Yup.string()
+            .trim()
+            .required(t('errors.required'))
+            .min(3, t('errors.symbolsLength'))
+            .max(20, t('errors.symbolsLength')),
+        password: Yup.string()
+            .trim()
+            .required(t('errors.required'))
+            .min(6, t('errors.minPasswordLength')),
+        confirmPassword: Yup.string()
+            .trim()
+            .required(t('errors.required'))
+            .oneOf([Yup.ref('password'), null], t('errors.confirmPassword')),
+    })
 
-  return (
-    <Formik
-      initialValues={{ username: '', password: '', confirmPassword: '' }}
-      validationSchema={validationSchema}
-      onSubmit={async (values, { setSubmitting }) => {
-        setSubmitting(true)
-        const { username, password } = values
-        try {
-          const responce = await axios.post(routes.signupPath(), { username, password })
-          setUsernameTaken(false)
-          dispatch(signUp(responce.data))
-          navigate('/')
-        }
-        catch (error) {
-          if (error.status === 409) {
-            setUsernameTaken(true)
-          }
-          console.log(error.message)
-        }
+    return (
+        <Formik
+            initialValues={{ username: '', password: '', confirmPassword: '' }}
+            validationSchema={validationSchema}
+            onSubmit={async (values, { setSubmitting }) => {
+                setSubmitting(true)
+                const { username, password } = values
+                try {
+                    const responce = await axios.post(routes.signupPath(), { username, password })
+                    setUsernameTaken(false)
+                    dispatch(signUp(responce.data))
+                    navigate('/')
+                }
+                catch (error) {
+                    if (error.status === 409) {
+                        setUsernameTaken(true)
+                    }
+                    console.log(error.message)
+                }
 
-        setSubmitting(false)
-      }}
-    >
-      {({ errors, touched }) => (
-        <Form className="w-50">
-          <h1 className="text-center mb-4">{t('signUp.h1')}</h1>
+                setSubmitting(false)
+            }}
+        >
+            {({ errors, touched }) => (
+                <Form className="w-50">
+                    <h1 className="text-center mb-4">{t('signUp.h1')}</h1>
 
-          <div className="form-floating mb-3">
-            <Field
-              type="username"
-              name="username"
-              autoComplete="username"
-              required
-              placeholder="От 3 до 20 символов"
-              id="username"
-              className={`form-control ${(errors.username && touched.username) || isUsernameTaken ? 'is-invalid' : ''}`}
-            />
-            <label htmlFor="username">{t('signUp.usernameLabel')}</label>
-            <div placement="right" className="invalid-tooltip">{isUsernameTaken ? t('errors.authorizationError') : errors.username ? errors.username : ''}
-            </div>
-          </div>
+                    <div className="form-floating mb-3">
+                        <Field
+                            type="username"
+                            name="username"
+                            autoComplete="username"
+                            required
+                            placeholder="От 3 до 20 символов"
+                            id="username"
+                            className={`form-control ${(errors.username && touched.username) || isUsernameTaken ? 'is-invalid' : ''}`}
+                        />
+                        <label htmlFor="username">{t('signUp.usernameLabel')}</label>
+                        <div className="invalid-tooltip">
+                            {isUsernameTaken ? t('errors.authorizationError') : errors.username ? errors.username : ''}
+                        </div>
+                    </div>
 
-          <div className="form-floating mb-3">
-            <Field
-              type="password"
-              name="password"
-              autoComplete="new-password"
-              required
-              placeholder="Не менее 6 символов"
-              id="password"
-              className={`form-control ${errors.password && touched.password && 'is-invalid'}`}
-              aria-describedby="passwordHelpBlock"
-              aria-autocomplete="list"
-            />
-            <div className="invalid-tooltip">{errors.password ? errors.password : ''}</div>
-            <label htmlFor="password">{t('signUp.passwordLabel')}</label>
-          </div>
+                    <div className="form-floating mb-3">
+                        <Field
+                            type="password"
+                            name="password"
+                            autoComplete="new-password"
+                            required
+                            placeholder="Не менее 6 символов"
+                            id="password"
+                            className={`form-control ${errors.password && touched.password && 'is-invalid'}`}
+                            aria-describedby="passwordHelpBlock"
+                            aria-autocomplete="list"
+                        />
+                        <div className="invalid-tooltip">{errors.password ? errors.password : ''}</div>
+                        <label htmlFor="password">{t('signUp.passwordLabel')}</label>
+                    </div>
 
-          <div className="form-floating mb-4">
-            <Field
-              type="password"
-              name="confirmPassword"
-              autoComplete="new-password"
-              required
-              placeholder="Пароли должны совпадать"
-              id="confirmPassword"
-              className={`form-control ${errors.confirmPassword && touched.confirmPassword && 'is-invalid'}`}
-            />
-            <div className="invalid-tooltip">{errors.confirmPassword ? errors.confirmPassword : ''}</div>
-            <label htmlFor="confirmPassword">{t('signUp.confirmPasswordLabel')}</label>
-          </div>
+                    <div className="form-floating mb-4">
+                        <Field
+                            type="password"
+                            name="confirmPassword"
+                            autoComplete="new-password"
+                            required
+                            placeholder="Пароли должны совпадать"
+                            id="confirmPassword"
+                            className={`form-control ${errors.confirmPassword && touched.confirmPassword && 'is-invalid'}`}
+                        />
+                        <div className="invalid-tooltip">{errors.confirmPassword ? errors.confirmPassword : ''}</div>
+                        <label htmlFor="confirmPassword">{t('signUp.confirmPasswordLabel')}</label>
+                    </div>
 
-          <Button type="submit" variant="outline-primary" className="w-100">
-            {t('signUp.registrationButton')}
-          </Button>
-        </Form>
-      )}
-    </Formik>
-  )
+                    <Button type="submit" variant="outline-primary" className="w-100">
+                        {t('signUp.registrationButton')}
+                    </Button>
+                </Form>
+            )}
+        </Formik>
+    )
 }
 
 export default SignUpForm

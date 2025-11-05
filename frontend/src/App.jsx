@@ -16,7 +16,7 @@ const App = () => {
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/signup" element={<SignUpPage />} />
       </Routes>
-      <ToastContainer position='top-right' autoClose={5000} />
+      <ToastContainer position="top-right" autoClose={5000} />
     </BrowserRouter>
   )
 }

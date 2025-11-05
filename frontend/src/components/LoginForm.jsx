@@ -19,7 +19,7 @@ const LoginForm = () => {
 
   return (
     <Formik
-      initialValues={{ username: "", password: "" }}
+      initialValues={{ username: '', password: '' }}
       onSubmit={async (values, { setSubmitting }) => {
         setSubmitting(true)
         try {
@@ -65,10 +65,10 @@ const LoginForm = () => {
               className={`form-control ${authError ? 'is-invalid' : ''}`}
             />
             <label htmlFor="password">{t('login.passwordLabel')}</label>
-            {authError && <div className='invalid-tooltip'>{t('errors.loginError')}</div>}
+            {authError && <div className="invalid-tooltip">{t('errors.loginError')}</div>}
           </div>
 
-          <Button type='submit' variant='outline-primary' className="w-100 mb-3" disabled={isSubmitting}>
+          <Button type="submit" variant="outline-primary" className="w-100 mb-3" disabled={isSubmitting}>
             {t('login.loginButton')}
           </Button>
         </Form>

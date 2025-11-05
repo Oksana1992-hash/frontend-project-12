@@ -29,7 +29,7 @@ const Rename = ({ modalInfo, onHide }) => {
       .required(t('errors.required'))
       .min(3, t('errors.symbolsLength'))
       .max(20, t('errors.symbolsLength'))
-      .notOneOf(channelsNames, t('errors.mustBeUnique'))
+      .notOneOf(channelsNames, t('errors.mustBeUnique')),
   })
 
   const editChannel = async (newName, id) => {
@@ -75,11 +75,11 @@ const Rename = ({ modalInfo, onHide }) => {
               onChange={formik.handleChange}
               required
             />
-            <Form.Label className='visually-hidden' htmlFor='name'>{t('modals.channelName')}</Form.Label>
+            <Form.Label className="visually-hidden" htmlFor="name">{t('modals.channelName')}</Form.Label>
             <div className="invalid-feedback">{formik.errors.name && formik.touched.name ? formik.errors.name : ''}</div>
             <div className="d-flex justify-content-end">
               <Button type="button" variant="secondary" className="me-2" onClick={() => onHide()}>{t('modals.cancelButton')}</Button>
-              <Button type='submit' variant='primary' disabled={isSubmitting}>{t('modals.sendButton')}</Button>
+              <Button type="submit" variant="primary" disabled={isSubmitting}>{t('modals.sendButton')}</Button>
             </div>
           </Form.Group>
         </Form>

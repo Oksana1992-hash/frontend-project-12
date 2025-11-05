@@ -5,7 +5,8 @@ let storedUserData
 try {
   const stored = localStorage.getItem('userId')
   storedUserData = stored ? JSON.parse(stored) : null
-} catch (e) {
+}
+catch (e) {
   console.error('Ошибка парсинга userId из localStorage:', e)
   storedUserData = null
 }

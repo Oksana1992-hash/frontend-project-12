@@ -7,7 +7,7 @@ const RenderChannelsButtons = ({ channel, currentChannelId, setCurrentChannelId,
 
   if (!channel.removable) {
     return (
-      <li key={channel.id} className='nav-item w-100'>
+      <li key={channel.id} className="nav-item w-100">
         <Button
           variant={`${channel.id === currentChannelId ? 'secondary' : 'white'}`}
           type="button"
@@ -44,8 +44,8 @@ const RenderChannelsButtons = ({ channel, currentChannelId, setCurrentChannelId,
           <span className="visually-hidden">{t('channels.channelManagement')}</span>
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item role='button' href='#' tabIndex={0} onClick={() => showModal('removing', channel)}>{t('channels.dropdownToggle.remove')}</Dropdown.Item>
-          <Dropdown.Item role='button' href='#' tabIndex={0} onClick={() => showModal('renaming', channel)}>{t('channels.dropdownToggle.rename')}</Dropdown.Item>
+          <Dropdown.Item role="button" href="#" tabIndex={0} onClick={() => showModal('removing', channel)}>{t('channels.dropdownToggle.remove')}</Dropdown.Item>
+          <Dropdown.Item role="button" href="#" tabIndex={0} onClick={() => showModal('renaming', channel)}>{t('channels.dropdownToggle.rename')}</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </li>

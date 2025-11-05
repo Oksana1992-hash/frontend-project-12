@@ -37,10 +37,10 @@ const Remove = ({ modalInfo, onHide, setCurrentChannelId }) => {
       </Modal.Header>
 
       <Modal.Body>
-        <p className='lead'>{t('modals.question')}</p>
-        <div className='d-flex justify-content-end'>
-          <Button type='button' variant='secondary' className='me-2' onClick={() => onHide()}>{t('modals.cancelButton')}</Button>
-          <Button type='button' variant='danger' onClick={handleRemove} disabled={isRemoving}>{t('modals.removeButton')}</Button>
+        <p className="lead">{t('modals.question')}</p>
+        <div className="d-flex justify-content-end">
+          <Button type="button" variant="secondary" className="me-2" onClick={() => onHide()}>{t('modals.cancelButton')}</Button>
+          <Button type="button" variant="danger" onClick={handleRemove} disabled={isRemoving}>{t('modals.removeButton')}</Button>
         </div>
       </Modal.Body>
     </Modal>

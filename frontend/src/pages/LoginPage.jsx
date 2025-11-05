@@ -13,7 +13,7 @@ const LoginPage = () => {
         <Row className="justify-content-center align-content-center h-100">
           <Col xs={12} md={8} xxl={6}>
             <Card className="shadow-sm">
-              <Card.Body className='row p-5'>
+              <Card.Body className="row p-5">
                 <Col xs={12} md={6} className="d-flex align-items-center justify-content-center mb-3 mb-md-0">
                   <img src="https://frontend-chat-ru.hexlet.app/assets/avatar-DIE1AEpS.jpg" alt={t('login.altText')} className="rounded-circle img-fluid" />
                 </Col>
