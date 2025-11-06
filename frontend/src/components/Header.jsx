@@ -1,7 +1,7 @@
 import { Container, Navbar } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
-import { logOut } from '../slices/authSlice.jsx'
+import { logOut } from '../store/slices/authSlice.jsx'
 import { useTranslation } from 'react-i18next'
 
 const Header = () => {

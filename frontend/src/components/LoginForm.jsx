@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import routes from '../routes'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { loginSuccess } from '../slices/authSlice'
+import { loginSuccess } from '../store/slices/authSlice.jsx'
 import { Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 

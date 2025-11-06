@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Button } from 'react-bootstrap'
 import routes from '../routes'
-import { signUp } from '../slices/authSlice'
+import { signUp } from '../store/slices/authSlice.jsx'
 import { useTranslation } from 'react-i18next'
 
 const SignUpForm = () => {
