@@ -9,8 +9,6 @@ import { Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
 const LoginForm = () => {
-  console.log('отрисовка LoginForm')
-
   const { t } = useTranslation()
 
   const navigate = useNavigate()

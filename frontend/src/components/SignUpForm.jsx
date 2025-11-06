@@ -10,8 +10,6 @@ import { signUp } from '../store/slices/authSlice.jsx'
 import { useTranslation } from 'react-i18next'
 
 const SignUpForm = () => {
-  console.log('отрисовка SignUpForm')
-
   const { t } = useTranslation()
 
   const navigate = useNavigate()

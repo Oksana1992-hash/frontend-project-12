@@ -11,8 +11,6 @@ import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 const HomePage = () => {
-  console.log('отрисовка HomePage')
-
   const { t } = useTranslation()
 
   const navigate = useNavigate()
@@ -20,7 +18,6 @@ const HomePage = () => {
 
   const { userId } = useSelector(state => state.auth)
   const token = userId?.token
-  console.log('Home Page, token', token)
 
   useEffect(() => {
     if (!userId) {
