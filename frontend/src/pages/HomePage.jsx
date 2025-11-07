@@ -19,6 +19,8 @@ const HomePage = () => {
   const { userId } = useSelector(state => state.auth)
   const token = userId?.token
 
+  const loadChannelsData = (response) => response.data
+
   useEffect(() => {
     if (!userId) {
       navigate('/login')
@@ -27,7 +29,7 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(routes.channelsPath(), { headers: { Authorization: `Bearer ${token}` } })
-        const channels = response.data // [{id: '1', name: 'general', removable: false}, {id: '2', name: 'random', removable: false}]
+        const channels = loadChannelsData(response) // [{id: '1', name: 'general', removable: false}, {id: '2', name: 'random', removable: false}]
         dispatch(loadChannels(channels))
       }
       catch (error) {
