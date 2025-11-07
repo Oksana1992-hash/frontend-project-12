@@ -13,7 +13,7 @@ const getSignUpSchema = t => Yup.object().shape({
   confirmPassword: Yup.string()
     .trim()
     .required(t('errors.required'))
-    .oneOf([Yup.ref('password'), null], t('errors.confirmPassword'))
+    .oneOf([Yup.ref('password'), null], t('errors.confirmPassword')),
 })
 
 export default getSignUpSchema

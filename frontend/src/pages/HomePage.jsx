@@ -19,7 +19,7 @@ const HomePage = () => {
   const { userId } = useSelector(state => state.auth)
   const token = userId?.token
 
-  const loadChannelsData = (response) => response.data
+  const loadChannelsData = response => response.data
 
   useEffect(() => {
     if (!userId) {
