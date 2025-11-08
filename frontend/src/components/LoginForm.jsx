@@ -47,7 +47,6 @@ const LoginForm = () => {
               type="username"
               name="username"
               placeholder="Введите имя пользователя"
-              autoComplete="username"
               required
               className={`form-control ${authError ? 'is-invalid' : ''}`}
             />
@@ -60,7 +59,6 @@ const LoginForm = () => {
               type="password"
               name="password"
               placeholder="Введите пароль"
-              autoComplete="current-password"
               required
               className={`form-control ${authError ? 'is-invalid' : ''}`}
             />

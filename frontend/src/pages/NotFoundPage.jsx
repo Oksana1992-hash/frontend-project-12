@@ -1,4 +1,4 @@
-import Header from '../components/Header'
+import Header from '../components/Header.jsx'
 import { useTranslation } from 'react-i18next'
 
 const NotFoundPage = () => {
